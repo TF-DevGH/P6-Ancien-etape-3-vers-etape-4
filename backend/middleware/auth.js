@@ -1,0 +1,17 @@
+const jwt = require('jsonwebtoken');
+
+const authorize = (req, res, next) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+    const userId = decodedToken.userId;
+    req.auth = {
+      userId: userId
+    };
+    next();
+  } catch (error) {
+    return res.status(401).json({ error: 'Authentification échouée' }); // Ajout d'un message d'erreur
+  }
+};
+
+module.exports = authorize;
