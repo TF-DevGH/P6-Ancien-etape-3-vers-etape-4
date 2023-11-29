@@ -4,21 +4,21 @@ const multer = require('../config/multer-config');
 
 const authorize = require('../middleware/authorize');
 const authMiddleware = require('../middleware/auth');
-const stuffCtrl = require('../controllers/stuff');
+const stuffCtrl = require('../controllers/sauce');
 
 // Assurez-vous que le chemin statique est correct
 router.use('/images', express.static('backend/images'));
 
-router.get('/', authMiddleware, authorize, stuffCtrl.getAllThings);
+router.get('/', authMiddleware, authorize, stuffCtrl.getAllSauces);
 
 // Utilisez multer.single('image') ici pour la route POST
-router.post('/', authMiddleware, authorize, multer, stuffCtrl.createThing);
+router.post('/', authMiddleware, authorize, multer, stuffCtrl.createSauce);
 
-router.get('/:id', authMiddleware, authorize, stuffCtrl.getOneThing);
+router.get('/:id', authMiddleware, authorize, stuffCtrl.getOneSauce);
 
 // Utilisez multer.single('image') ici pour la route PUT
-router.put('/:id', authMiddleware, authorize, multer, stuffCtrl.modifyThing);
+router.put('/:id', authMiddleware, authorize, multer, stuffCtrl.modifySauce);
 
-router.delete('/:id', authMiddleware, authorize, stuffCtrl.deleteThing);
+router.delete('/:id', authMiddleware, authorize, stuffCtrl.deleteSauce);
 
 module.exports = router;
